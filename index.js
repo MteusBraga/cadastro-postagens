@@ -3,11 +3,11 @@ const app = express()
 
 //rotas
 app.get("/", function(req, res){
-    res.send("Hello!")
+    res.sendFile(__dirname + "/html/index.html")
 })
 
 app.get("/sobre", function(req,res){
-    res.send("Minha pagina sobre")
+    res.sendFile(__dirname + "/html/sobre.html")
 })
 
 app.get("/blog", function(req,res){
