@@ -1,22 +1,24 @@
 const express = require("express");
 const app = express()
 const handlebars = require('express-handlebars')
-const Sequelize = require("sequelize")
-
+const bodyParser = require('body-parser')
 
 
 //Config
     //Template Engine
     app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}))
     app.set('view engine', 'handlebars')
-    //Conexao com o banco de dados MySQL
-    const sequelize = new Sequelize('sistemadecadastro', 'root', '1964', {
-        host: 'localhost',
-        dialect:'mysql'
-    })
+    //Body Parser
+    app.use(bodyParser.urlencoded({extended: false}))
+    app.use(bodyParser.json())
+    
 //Rotas
     app.get('/cad', function(req,res){
         res.render('layouts/formulario')
+    })
+
+    app.post('/add', function(req,res){
+        res.send(`Texto: ${req.body.titulo} Conteudo: ${req.body.conteudo}`)
     })
 
 app.listen(8081, function(){
